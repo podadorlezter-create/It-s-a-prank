@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0a0708" />
+<meta name="description" content="A private invitation for Dysel Bel." />
+<title>For Dysel Bel — A Little Question</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- SVG ICON SPRITE -->
+<svg class="sprite" aria-hidden="true" focusable="false" style="position:absolute;width:0;height:0;overflow:hidden">
+  <symbol id="i-calendar" viewBox="0 0 24 24">
+    <rect x="3" y="5" width="18" height="16" rx="3"/>
+    <path d="M8 3v4M16 3v4M3 10.5h18"/>
+  </symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9"/>
+    <path d="M12 7.2v5.1l3.2 1.9"/>
+  </symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24">
+    <path d="M12 21s7-5.6 7-11a7 7 0 1 0-14 0c0 5.4 7 11 7 11z"/>
+    <circle cx="12" cy="9.8" r="2.6"/>
+  </symbol>
+  <symbol id="i-food" viewBox="0 0 24 24">
+    <path d="M7 3v6.2a2.3 2.3 0 0 0 4.6 0V3"/>
+    <path d="M9.3 11.6V21"/>
+    <path d="M17.4 3c-1.7 1.1-2.6 2.8-2.6 4.8 0 2 1 3.3 2.6 4.2V21"/>
+  </symbol>
+  <symbol id="i-note" viewBox="0 0 24 24">
+    <path d="M4 20h4L18.2 9.8a2.9 2.9 0 0 0-4-4L4 16v4z"/>
+    <path d="M13.6 6.4l4 4"/>
+  </symbol>
+  <symbol id="i-check" viewBox="0 0 24 24">
+    <path d="M4.5 12.6l5 5L19.8 6.8"/>
+  </symbol>
+  <symbol id="i-play" viewBox="0 0 24 24">
+    <path d="M8.5 5.2l10.2 6.8-10.2 6.8z"/>
+  </symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24">
+    <path d="M8.6 5.4v13.2M15.4 5.4v13.2"/>
+  </symbol>
+  <symbol id="i-download" viewBox="0 0 24 24">
+    <path d="M12 3.6v11.2"/>
+    <path d="M7.4 10.4L12 15l4.6-4.6"/>
+    <path d="M4 20.2h16"/>
+  </symbol>
+  <symbol id="i-edit" viewBox="0 0 24 24">
+    <path d="M4 20h4L18.2 9.8a2.9 2.9 0 0 0-4-4L4 16v4z"/>
+  </symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24">
+    <path d="M12 20.4S4.6 16 4.6 10.9a4.3 4.3 0 0 1 7.4-3 4.3 4.3 0 0 1 7.4 3c0 5.1-7.4 9.5-7.4 9.5z"/>
+  </symbol>
+  <symbol id="i-sparkle" viewBox="0 0 24 24">
+    <path d="M12 3l1.9 5.4L19.3 10l-5.4 1.9L12 17.3l-1.9-5.4L4.7 10l5.4-1.6z"/>
+  </symbol>
+</svg>
+
+<!-- ATMOSPHERE -->
+<div class="atmosphere" aria-hidden="true">
+  <div class="orb orb--1"></div>
+  <div class="orb orb--2"></div>
+  <div class="orb orb--3"></div>
+  <canvas id="particles"></canvas>
+  <div class="vignette"></div>
+  <div class="grain"></div>
+</div>
+
+<div id="fxLayer" class="fx-layer" aria-hidden="true"></div>
+
+<!-- MUSIC DOCK -->
+<div class="music-dock">
+  <button id="musicBtn" class="music-btn" type="button" aria-pressed="false" aria-label="Play background music" title="Background music">
+    <svg class="ico ico--play" aria-hidden="true"><use href="#i-play"/></svg>
+    <svg class="ico ico--pause" aria-hidden="true"><use href="#i-pause"/></svg>
+  </button>
+  <label class="sr-only" for="volume">Music volume</label>
+  <input id="volume" class="vol" type="range" min="0" max="100" value="65" aria-label="Music volume" />
+</div>
+
+<main>
+
+  <!-- 1 · INVITATION -->
+  <section class="screen is-active" id="screen-invite">
+    <div class="screen-inner invite-inner">
+      <p class="eyebrow" data-reveal style="--d:150">To Someone Special</p>
+      <h1 class="name" data-reveal style="--d:400">Dysel&nbsp;Bel</h1>
+      <div class="rule" data-reveal style="--d:650" aria-hidden="true"><span></span></div>
+      <p class="lede" data-reveal style="--d:850">I have a little question for you...</p>
+      <button class="btn btn--gold" id="openBtn" type="button" data-reveal style="--d:1100">
+        <span>Open My Message</span>
+      </button>
+      <p class="hint" data-reveal style="--d:1400">Best viewed with the sound on.</p>
+    </div>
+  </section>
+
+  <!-- 2 · THE QUESTION -->
+  <section class="screen" id="screen-question">
+    <div class="screen-inner">
+      <div class="card question-card">
+        <p class="eyebrow" data-reveal>Hey, Dysel Bel...</p>
+        <h2 class="question-lede" data-reveal style="--d:200">
+          I've been wanting to ask you something special.
+        </h2>
+        <p class="question-big" data-reveal style="--d:420">
+          Can I take you on a date?
+        </p>
+        <div class="btn-row" id="answerRow" data-reveal style="--d:650">
+          <button class="btn btn--gold" id="yesBtn" type="button">
+            <svg class="ico" aria-hidden="true"><use href="#i-heart"/></svg>
+            <span>Yes, I'd love to</span>
+          </button>
+          <button class="btn btn--ghost" id="noBtn" type="button">
+            <span>No</span>
+          </button>
+        </div>
+        <p class="tease" id="tease" role="status" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · DATE PLANNING -->
+  <section class="screen" id="screen-plan">
+    <div class="screen-inner plan-inner">
+
+      <header class="plan-head">
+        <h2 class="plan-title" data-reveal>It's a Date! ✨</h2>
+        <p class="plan-sub" data-reveal style="--d:180">
+          Now, let's plan our little moment together.
+        </p>
+      </header>
+
+      <form class="card plan-card" id="planForm" novalidate>
+
+        <div class="field" id="fieldDate">
+          <span class="field-label" id="lblDate">
+            <svg class="ico" aria-hidden="true"><use href="#i-calendar"/></svg>
+            Date
+          </span>
+          <input type="date" id="dateInput" class="date-input" aria-labelledby="lblDate" required />
+        </div>
+
+        <div class="field" id="fieldTime">
+          <span class="field-label" id="lblTime">
+            <svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg>
+            Time
+          </span>
+          <div class="options" id="timeOptions" role="radiogroup" aria-labelledby="lblTime">
+            <button type="button" class="option" role="radio" aria-checked="false" data-value="Morning">
+              <span>Morning</span><svg class="check" aria-hidden="true"><use href="#i-check"/></svg>
+            </button>
+            <button type="button" class="option" role="radio" aria-checked="false" data-value="Afternoon">
+              <span>Afternoon</span><svg class="check" aria-hidden="true"><use href="#i-check"/></svg>
+            </button>
+            <button type="button" class="option" role="radio" aria-checked="false" data-value="Evening">
+              <span>Evening</span><svg class="check" aria-hidden="true"><use href="#i-check"/></svg>
+            </button>
+            <button type="button" class="option" role="radio" aria-checked="false" data-value="Night">
+              <span>Night</span><svg class="check" aria-hidden="true"><use href="#i-check"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="field" id="fieldLocation">
+          <span class="field-label" id="lblLocation">
+            <svg class="ico" aria-hidden="true"><use href="#i-pin"/></svg>
+            Location
+          </span>
+          <div class="options" id="locationOptions" role="radiogroup" aria-labelledby="lblLocation">
+            <button type="button" class="option" role="radio" aria-checked="false" data-value="A cozy café">
+              <span>A cozy café</span><svg class="check" aria-hidden="true"><use href="#i-check"/></svg>
+            </button>
+            <button type="button" class="option" role="radio" aria-checked="false" data-value="A nice restaurant">
+              <span>A nice restaurant</span><svg class="check" aria-hidden="true"><use href="#i-check"/></svg>
+            </button>
+            <button type="button" class="option" role="radio" aria-checked="false" data-value="A peaceful beach">
+              <span>A peaceful beach</span><svg class="check" aria-hidden="true"><use href="#i-check"/></svg>
+            </button>
+            <button type="button" class="option" role="radio" aria-checked="false" data-value="A sunset-viewing spot">
+              <span>A sunset-viewing spot</span><svg class="check" aria-hidden="true"><use href="#i-check"/></svg>
+            </button>
+            <button type="button" class="option" role="radio" aria-checked="false" data-value="Somewhere special">
+              <span>Somewhere special</span><svg class="check" aria-hidden="true"><use href="#i-check"/></svg>
+            </button>
+            <button type="button" class="option" role="radio" aria-checked="false" data-value="custom">
+              <span>Other / custom location</span><svg class="check" aria-hidden="true"><use href="#i-check"/></svg>
+            </button>
+          </div>
+          <div class="custom-wrap" id="customLocWrap" hidden>
+            <label class="sr-only" for="customLocInput">Your custom location</label>
+            <input type="text" id="customLocInput" class="text-input" maxlength="80"
+                   placeholder="Where would you like to go?" autocomplete="off" />
+          </div>
+        </div>
+
+        <div class="field" id="fieldFood">
+          <span class="field-label" id="lblFood">
+            <svg class="ico" aria-hidden="true"><use href="#i-food"/></svg>
+            Food
+          </span>
+          <div class="options" id="foodOptions" role="radiogroup" aria-labelledby="lblFood">
+            <button type="button" class="option" role="radio" aria-checked="false" data-value="Coffee and pastries">
+              <span>Coffee and pastries</span><svg class="check" aria-hidden="true"><use href="#i-check"/></svg>
+            </button>
+            <button type="button" class="option" role="radio" aria-checked="false" data-value="Pizza">
+              <span>Pizza</span><svg class="check" aria-hidden="true"><use href="#i-check"/></svg>
+            </button>
+            <button type="button" class="option" role="radio" aria-checked="false" data-value="Pasta">
+              <span>Pasta</span><svg class="check" aria-hidden="true"><use href="#i-check"/></svg>
+            </button>
+            <button type="button" class="option" role="radio" aria-checked="false" data-value="Burgers">
+              <span>Burgers</span><svg class="check" aria-hidden="true"><use href="#i-check"/></svg>
+            </button>
+            <button type="button" class="option" role="radio" aria-checked="false" data-value="Filipino food">
+              <span>Filipino food</span><svg class="check" aria-hidden="true"><use href="#i-check"/></svg>
+            </button>
+            <button type="button" class="option" role="radio" aria-checked="false" data-value="Desserts">
+              <span>Desserts</span><svg class="check" aria-hidden="true"><use href="#i-check"/></svg>
+            </button>
+            <button type="button" class="option" role="radio" aria-checked="false" data-value="custom">
+              <span>Let me choose something else</span><svg class="check" aria-hidden="true"><use href="#i-check"/></svg>
+            </button>
+          </div>
+          <div class="custom-wrap" id="customFoodWrap" hidden>
+            <label class="sr-only" for="customFoodInput">Your food preference</label>
+            <input type="text" id="customFoodInput" class="text-input" maxlength="80"
+                   placeholder="What sounds good to you?" autocomplete="off" />
+          </div>
+        </div>
+
+        <div class="field" id="fieldNotes">
+          <label class="field-label" for="notesInput">
+            <svg class="ico" aria-hidden="true"><use href="#i-note"/></svg>
+            A note for me <span class="optional">(optional)</span>
+          </label>
+          <textarea id="notesInput" class="text-input textarea" rows="3" maxlength="400"
+                    placeholder="Suggest a place, a time, or anything you'd love to do..."></textarea>
+        </div>
+
+        <div class="plan-actions">
+          <button class="btn btn--gold" id="confirmBtn" type="submit">
+            <span>Confirm Our Date</span>
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </section>
+
+  <!-- 4 · CONFIRMATION -->
+  <section class="screen" id="screen-confirm">
+    <div class="screen-inner confirm-inner">
+
+      <p class="eyebrow" data-reveal>Something to Look Forward To</p>
+
+      <h2 class="confirm-title" data-reveal style="--d:200">
+        Dysel Bel, our little date is in the making.
+      </h2>
+
+      <div class="card summary" data-reveal style="--d:400">
+        <dl class="summary-list">
+          <div class="summary-row">
+            <dt><svg class="ico" aria-hidden="true"><use href="#i-calendar"/></svg> Date</dt>
+            <dd id="sumDate">—</dd>
+          </div>
+          <div class="summary-row">
+            <dt><svg class="ico" aria-hidden="true"><use href="#i-clock"/></svg> Time</dt>
+            <dd id="sumTime">—</dd>
+          </div>
+          <div class="summary-row">
+            <dt><svg class="ico" aria-hidden="true"><use href="#i-pin"/></svg> Location</dt>
+            <dd id="sumLocation">—</dd>
+          </div>
+          <div class="summary-row">
+            <dt><svg class="ico" aria-hidden="true"><use href="#i-food"/></svg> Food</dt>
+            <dd id="sumFood">—</dd>
+          </div>
+          <div class="summary-row" id="sumNotesRow" hidden>
+            <dt><svg class="ico" aria-hidden="true"><use href="#i-note"/></svg> Notes</dt>
+            <dd id="sumNotes"></dd>
+          </div>
+        </dl>
+      </div>
+
+      <p class="quote" data-reveal style="--d:600">
+        “Sometimes, the simplest moments become the most beautiful memories.
+        I'm looking forward to spending a little time with you.”
+      </p>
+
+      <div class="btn-row" data-reveal style="--d:800">
+        <button class="btn btn--gold" id="saveBtn" type="button">
+          <svg class="ico" aria-hidden="true"><use href="#i-download"/></svg>
+          <span>Save My Date Details</span>
+        </button>
+        <button class="btn btn--ghost" id="editBtn" type="button">
+          <svg class="ico" aria-hidden="true"><use href="#i-edit"/></svg>
+          <span>Edit my choices</span>
+        </button>
+      </div>
+
+      <p class="fineprint" data-reveal style="--d:1000">
+        Saved privately on this device only. Nothing is sent anywhere.
+      </p>
+
+    </div>
+  </section>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
